@@ -65,6 +65,9 @@ yarn build
 - `src/hook/useTimer.js` — timer state and interval logic
 - `src/utils/formatTime.js` — duration formatting helper
 
-## License
+## Live Link
+Check out the live website: [here](https://study-time-track.netlify.app/).
 
-This project is free to use and modify.
+## Contributing
+
+Feel free to submit issues and pull requests. For major changes, please open an issue first to discuss what you would like to change.
