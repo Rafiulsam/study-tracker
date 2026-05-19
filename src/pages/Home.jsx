@@ -88,43 +88,17 @@ const Home = () => {
 
     const totalSeconds = sessions.reduce((s, it) => s + (it.duration || 0), 0);
 
-    // const exportCsv = () => {
-    //     if (sessions.length === 0) return;
-
-    //     const rows = [
-    //         ['Start', 'End', 'Duration'],
-    //         ...sessions.map((session) => [
-    //             new Date(session.start).toLocaleString(),
-    //             new Date(session.end).toLocaleString(),
-    //             formatTime(session.duration),
-    //         ]),
-    //     ];
-
-    //     const csvContent = rows
-    //         .map((row) => row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(','))
-    //         .join('\r\n');
-
-    //     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    //     const url = URL.createObjectURL(blob);
-    //     const link = document.createElement('a');
-    //     link.href = url;
-    //     link.setAttribute('download', `study-sessions-${new Date().toISOString().slice(0, 10)}.csv`);
-    //     document.body.appendChild(link);
-    //     link.click();
-    //     document.body.removeChild(link);
-    //     URL.revokeObjectURL(url);
-    // };
-
+    //PDF EXPORT
     const exportPdf = () => {
         if (sessions.length === 0) return;
 
         const doc = new jsPDF();
 
-        // ===== TITLE =====
+        //TITLE 
         doc.setFontSize(20);
         doc.text("Study Session Report", 14, 20);
 
-        // ===== GENERATED DATE =====
+        //GENERATED DATE
         doc.setFontSize(10);
         doc.text(
             `Generated: ${new Date().toLocaleString()}`,
@@ -132,7 +106,7 @@ const Home = () => {
             28
         );
 
-        // ===== TOTAL TIME =====
+        //TOTAL TIME
         doc.setFontSize(12);
         doc.text(
             `Total Study Time: ${formatTime(totalSeconds)}`,
@@ -140,7 +114,7 @@ const Home = () => {
             38
         );
 
-        // ===== TABLE =====
+        //TABLE
         autoTable(doc, {
             startY: 48,
             head: [["Start Time", "End Time", "Duration"]],
@@ -158,7 +132,7 @@ const Home = () => {
             },
         });
 
-        // ===== DOWNLOAD =====
+        //DOWNLOAD
         doc.save(
             `study-report-${new Date()
                 .toISOString()
@@ -189,18 +163,6 @@ const Home = () => {
                     <div className="flex items-center justify-between gap-2 mb-2 flex-wrap">
                         <h2 className="font-semibold">Session History</h2>
                         <div className="flex gap-2">
-                            {/* <button
-                                onClick={exportCsv}
-                                disabled={sessions.length === 0}
-                                className={
-                                    `text-sm rounded-md px-2 py-1 transition-colors duration-200 ` +
-                                    (sessions.length === 0
-                                        ? 'text-gray-500 cursor-not-allowed'
-                                        : 'text-slate-700 hover:bg-gray-200/50 cursor-pointer')
-                                }
-                            >
-                                Export CSV
-                            </button> */}
                             <button
                                 onClick={exportPdf}
                                 disabled={sessions.length === 0}

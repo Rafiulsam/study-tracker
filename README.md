@@ -1,17 +1,17 @@
 # Study Tracker
 
-Study Tracker is a lightweight React app for tracking study sessions, saving time logs locally, and exporting session history as a `.csv` file.
+Study Tracker is a lightweight React app for tracking study sessions, saving time logs locally, and exporting session history as a `.pdf` file.
 
 ## Summary
 
-This app lets you start a study timer, stop it when you're done, and store each session in your browser. Your session history appears in the UI, and you can export your tracked study sessions to a CSV file for further analysis.
+This app lets you start a study timer, stop it when you're done, and store each session in your browser. Your session history appears in the UI, and you can export your tracked study sessions to a PDF file for further analysis.
 
 ## Features
 
 - Start / stop timer for a study session
 - Auto-save session history to `localStorage`
 - View session history with start time, end time, and duration
-- Export session history as a `.csv` file
+- Export session history as a `.pdf` file
 - Clear session history with a confirmation prompt
 - Responsive UI with a blurred background overlay and smooth button animations
 
@@ -48,13 +48,13 @@ yarn build
 1. Click **Start** to begin a study session.
 2. Click **Stop** to end the session and save it.
 3. View the session history below the timer.
-4. Click **Export CSV** to download session data.
+4. Click **Export PDF** to download session data.
 5. Click **Clear** to remove all saved sessions.
 
 ## Notes
 
 - Session history is saved only in the browser using `localStorage`.
-- Exported CSV timestamps are formatted in your local timezone.
+- Exported PDF timestamps are formatted in your local timezone.
 - The duration is recorded as the actual elapsed study time.
 
 ## Project Structure
