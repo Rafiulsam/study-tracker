@@ -45,23 +45,26 @@ const Home = () => {
     };
 
     const handleStop = () => {
-        stopTimer();
+    stopTimer();
 
-        const end = Date.now();
-        const duration = seconds;
+    const end = Date.now();
 
-        const session = {
-            id: String(Date.now()),
-            start: startTimestamp ? new Date(startTimestamp).toISOString() : new Date(end - duration * 1000).toISOString(),
-            end: new Date(end).toISOString(),
-            duration, // seconds
-        };
+    const duration = Math.floor(
+        (end - startTimestamp) / 1000
+    );
 
-        setSessions((prev) => [session, ...prev]);
-
-        setStartTimestamp(null);
-        resetTimer();
+    const session = {
+        id: String(Date.now()),
+        start: new Date(startTimestamp).toISOString(),
+        end: new Date(end).toISOString(),
+        duration,
     };
+
+    setSessions((prev) => [session, ...prev]);
+
+    setStartTimestamp(null);
+    resetTimer();
+};
 
     const clearHistory = () => {
         Swal.fire({

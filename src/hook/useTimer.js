@@ -1,16 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const useTimer = () => {
   const [seconds, setSeconds] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
+  const startTimeRef = useRef(null);
+  const savedSecondsRef = useRef(0);
 
   useEffect(() => {
     let interval;
 
     if (isRunning) {
+      if (!startTimeRef.current) {
+        startTimeRef.current = Date.now() - savedSecondsRef.current * 1000;
+      }
+
       interval = setInterval(() => {
-        setSeconds((prev) => prev + 1);
-      }, 1000);
+        const elapsed = Math.floor((Date.now() - startTimeRef.current) / 1000);
+        setSeconds(elapsed);
+      }, 250);
     }
 
     return () => clearInterval(interval);
@@ -21,10 +28,13 @@ const useTimer = () => {
   };
 
   const stopTimer = () => {
+    savedSecondsRef.current = seconds;
     setIsRunning(false);
   };
 
   const resetTimer = () => {
+    savedSecondsRef.current = 0;
+    startTimeRef.current = null;
     setSeconds(0);
   };
 
